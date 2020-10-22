@@ -1,7 +1,7 @@
 # elasticSearch
 ## Create Policy
 ```JSON
-POST _ilm/policy/policy-prd-xxx
+PUT _ilm/policy/policy-prd-xxx
 
 {
     "policy": {
