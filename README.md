@@ -50,3 +50,15 @@ POST /_aliases
 
 }
 ```
+## Reindex
+```JSON
+POST _reindex
+    {
+      "source": {
+        "index": "SRC-*"
+      },
+      "dest": {
+        "index": "DEST-*"
+      }
+    }
+```
