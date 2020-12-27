@@ -62,3 +62,47 @@ POST _reindex
       }
     }
 ```
+##Rollover steps
+```
+PUT _index_template/vodadevsize_template
+{
+  "index_patterns": ["vodadevsize-*"],                 
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1,
+      "index.lifecycle.name": "vodadevsize_policy",      
+      "index.lifecycle.rollover_alias": "vodarollsize"    
+    }
+  }
+}
+PUT _ilm/policy/vodadevsize_policy
+{
+  "policy": {
+    "phases": {
+      "hot": {                      
+        "actions": {
+          "rollover": {
+            "max_age": "30d",
+            "max_size": "1kb"
+          }
+        }
+      },
+      "delete": {
+        "min_age": "60d",           
+        "actions": {
+          "delete": {}              
+        }
+      }
+    }
+  }
+}
+PUT vodadevsize-000001
+{
+  "aliases": {
+    "vodarollsize": {
+      "is_write_index": true
+    }
+  }
+}
+```
