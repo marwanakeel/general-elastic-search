@@ -62,7 +62,7 @@ POST _reindex
       }
     }
 ```
-##Rollover steps
+## Rollover steps
 ```
 PUT _index_template/vodadevsize_template
 {
