@@ -67,7 +67,6 @@ POST _reindex
 PUT _index_template/vodadevsize_template
 {
   "index_patterns": ["vodadevsize-*"],      
-  "order": 0,           
   "template": {
     "settings": {
       "number_of_shards": 1,
