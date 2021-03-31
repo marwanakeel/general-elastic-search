@@ -2,7 +2,6 @@
 ## Create Policy
 ```JSON
 PUT _ilm/policy/policy-prd-xxx
-
 {
     "policy": {
         "phases": {
