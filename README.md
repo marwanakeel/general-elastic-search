@@ -62,7 +62,7 @@ POST _reindex
       }
     }
 ```
-## modify a field based on a condition
+## Modify a field based on a condition
 ```
 POST adsl_siebel_history-2021.03.*/_update_by_query?conflicts=proceed
 {
@@ -77,6 +77,17 @@ POST adsl_siebel_history-2021.03.*/_update_by_query?conflicts=proceed
   },
   "script" : {
     "source": "ctx._source.join_date_str = '(' + ctx._source.join_date+')';"
+  }
+}
+```
+## Add Data
+```
+POST my-index-000001/_doc/
+{
+  "@timestamp": "2099-11-15T13:12:00",
+  "message": "GET /search HTTP/1.1 200 1070000",
+  "user": {
+    "id": "kimchy"
   }
 }
 ```
