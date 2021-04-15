@@ -61,6 +61,24 @@ POST _reindex
       }
     }
 ```
+## modify a field based on a condition
+```
+POST adsl_siebel_history-2021.03.*/_update_by_query?conflicts=proceed
+{
+  "query": { 
+    "bool": {
+        "must": {
+            "exists": {
+                "field": "ip"
+            }
+        }
+    }
+  },
+  "script" : {
+    "source": "ctx._source.join_date_str = '(' + ctx._source.join_date+')';"
+  }
+}
+```
 ## Rollover steps
 ```
 PUT _index_template/vodadevsize_template
