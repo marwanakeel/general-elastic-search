@@ -27,7 +27,8 @@ PUT _template/template-prd-xxx
   "settings": {
     "number_of_shards": "1",
     "number_of_replicas": "1",
-    "index.lifecycle.name": "policy-prd-xxx"
+    "index.lifecycle.name": "policy-prd-xxx",
+    "index.default_pipeline": "xxxx-pipeline"
     
   }  ,
   "aliases" : {
