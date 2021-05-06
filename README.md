@@ -166,7 +166,7 @@ PUT /_enrich/policy/users-policy
 ```
 POST /_enrich/policy/users-policy/_execute
 ```
-### The belwo is to create the ingest pipeline and trying to insert an element
+### The below is to create the ingest pipeline and trying to insert an element
 ```
 PUT /_ingest/pipeline/user_lookup
 {
