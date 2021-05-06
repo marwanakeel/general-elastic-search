@@ -1,4 +1,4 @@
-# elasticSearch
+# ElasticSearch
 ## Create Policy
 ```JSON
 PUT _ilm/policy/policy-prd-xxx
@@ -134,4 +134,60 @@ PUT vodadevsize-000001
     }
   }
 }
+```
+
+## Create Enrich Policy steps
+### This will be the index we will create the enrich policy based upon
+```
+PUT /users/_doc/1?refresh=wait_for
+{
+  "email": "mardy.brown@asciidocsmith.com",
+  "first_name": "Mardy",
+  "last_name": "Brown",
+  "city": "New Orleans",
+  "county": "Orleans",
+  "state": "LA",
+  "zip": 70116,
+  "web": "mardy.asciidocsmith.com"
+}
+```
+### This is the policy itself where we identify the fields that we want to enrich
+```
+PUT /_enrich/policy/users-policy
+{
+  "match": {
+    "indices": "users",
+    "match_field": "email",
+    "enrich_fields": ["first_name", "last_name", "city", "zip", "state"]
+  }
+}
+```
+### This must be done whenever the index is updated to update the enrich index 
+```
+POST /_enrich/policy/users-policy/_execute
+```
+### The belwo is to create the ingest pipeline and trying to insert an element
+```
+PUT /_ingest/pipeline/user_lookup
+{
+  "description" : "Enriching user details to messages",
+  "processors" : [
+    {
+      "enrich" : {
+        "policy_name": "users-policy",
+        "field" : "email",
+        "target_field": "user",
+        "max_matches": "1"
+      }
+    }
+  ]
+}
+
+PUT /my-user-00001/_doc/my_id3?pipeline=user_lookup
+{
+  "email": "mardy3.brown@asciidocsmith.com"
+}
+
+GET /my-user-00001/_doc/my_id3
+
 ```
