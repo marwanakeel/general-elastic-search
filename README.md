@@ -61,6 +61,11 @@ POST _reindex
         "index": "DEST-*"
       }
     }
+ POST _reindex 
+ { 
+ "source": { "index": "foo-2019.10.*" }, 
+ "dest": { "index": "foo-2019.10" } 
+ }
 ```
 ## Modify a field based on a condition
 ```
