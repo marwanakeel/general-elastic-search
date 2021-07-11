@@ -196,7 +196,7 @@ PUT /my-user-00001/_doc/my_id3?pipeline=user_lookup
 GET /my-user-00001/_doc/my_id3
 
 ```
-elasticsearch filter
+## elasticsearch filter
 The elasticsearch filter copies fields from previous log events in Elasticsearch to current events.
 
 The following config shows a complete example of how this filter might be used. Whenever Logstash receives an "end" event, it uses this Elasticsearch filter to find the matching "start" event based on some operation identifier. Then it copies the @timestamp field from the "start" event into a new field on the "end" event. Finally, using a combination of the date filter and the ruby filter, the code in the example calculates the time duration in hours between the two events.
