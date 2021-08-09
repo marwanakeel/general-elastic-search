@@ -216,3 +216,6 @@ The following config shows a complete example of how this filter might be used. 
         }
       }
 ```
+Machines:
+16 CPU => Data Node (Max 86% Avg 33% Min 4%) - Master (Max 20% Avg 2% Min 0%) - Ingest (Max 20% Avg 2% Min 0%)
+64 GB => All (32 GB)
